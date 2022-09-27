@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link
+      href="https://fonts.googleapis.com/css?family=DM+Sans&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+    />
+
+  
+
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="bodyContainer">
+      <header>
+        <img src="assets/favicon.png" alt="logo" />
+        <h1>Les petits plats</h1>
+      </header>
+      <div id="searchBarContainer" class="searchBarContainer"></div>
+      <div id ="filterListContainer" class="filterListContainer">
+        <ul></ul>
+      </div>
+      <div id="filterCategoryContainer" class="filterCategoryContainer"></div>
+      <div id="recipesCardsContainer" class="recipesCardsContainer"></div>
+    </div>
+
+    <!-- Models -->
+    <script src="/js/models/Recipes.js"></script>
+
+    <!-- Templates -->
+    <script src="/js/templates/RecipesCard.js"></script>
+    <script src="/js/templates/SearchBar.js"></script>
+    <script src="/js/templates/FilterOptions.js"></script>
+
+    <!-- Api -->
+    <script src="/data/recipes.js"></script>
+
+    <!-- Search Engine -->
+    <script src="/js/SearchEngine.js"></script>
+
+    <!-- Entry point -->
+    <script src="/js/App.js"></script>
+  </body>
+</html>
