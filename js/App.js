@@ -12,13 +12,25 @@ class App {
   }
 
   async main() {
+    /////////// searchbar
+
+    const searchBar = new SearchBar(
+      this._filtersSelected,
+      this._recipesList,
+      this._searchValue
+    );
+    document
+      .getElementById("searchBarContainer")
+      .appendChild(searchBar.createSearchBar());
+
+    searchBar.searchRecipes();
+
     /////////// Recipes card
 
     this._recipesList.forEach((recipe) => {
       const recipeInstance = new Recipes(recipe);
       this._recipesContainer.appendChild(recipeInstance.createCard());
     });
-    
   }
 }
 
