@@ -12,6 +12,13 @@ class App {
   }
 
   async main() {
+    /////////// Recipes card
+
+    this._recipesList.forEach((recipe) => {
+      const recipeInstance = new Recipes(recipe);
+      this._recipesContainer.appendChild(recipeInstance.createCard());
+    });
+    
   }
 }
 
