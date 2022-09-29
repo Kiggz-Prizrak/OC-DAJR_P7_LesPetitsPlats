@@ -7,30 +7,56 @@ class App {
     this._recipesList = this._recipesApi;
   }
 
-  refresh() {}
+  refresh() {
+    // console.log(this);
+    //  console.log("refresh");
+    //  console.log(this._filtersSelected);
+    //  console.log(this._recipesList);
+
+    this._recipesContainer.innerHTML = "";
+
+    this._recipesList = this._recipesApi;
+
+    // this.searchEngine = new SearchEngine(
+    // this._filtersSelected, this._recipesList;
+    // );
+
+    this._recipesList = this._searchEngine.searchBarFilter(
+      this._searchBar.getSearchInput(),
+      this._recipesList
+    );
+
+    this._recipesList = this._searchEngine.ingredientsFilter(
+      this._filtersSelected,
+      this._recipesList
+    );
+    this._recipesList = this._searchEngine.ustensilsFilter(
+      this._filtersSelected,
+      this._recipesList
+    );
+    this._recipesList = this._searchEngine.applianceFilter(
+      this._filtersSelected,
+      this._recipesList
+    );
+
+    this._ingredientsFilter.refresh(this._recipesList);
+    this._ustensilsFilter.refresh(this._recipesList);
+    this._applianceFilter.refresh(this._recipesList);
+
+    console.log(this._recipesList);
+    this._recipesList.forEach((recipe) => {
+      const recipeInstance = new Recipes(recipe);
+      this._recipesContainer.appendChild(recipeInstance.createCard());
+    });
+  }
 
   async main() {
-    /////////// searchbar
-
-    const searchBar = new SearchBar(
-      this._filtersSelected,
-      this._recipesList,
-      this._searchValue
-    );
-    document
-      .getElementById("searchBarContainer")
-      .appendChild(searchBar.createSearchBar());
-
-    searchBar.searchRecipes();
-
     /////////// Recipes card
 
     this._recipesList.forEach((recipe) => {
       const recipeInstance = new Recipes(recipe);
       this._recipesContainer.appendChild(recipeInstance.createCard());
     });
-
-    /////////// Filter
 
     // ingredient list
 
@@ -71,6 +97,58 @@ class App {
     document
       .getElementById("filterCategoryContainer")
       .appendChild(this._ustensilsFilter.createFilterOptions());
+
+    ///////////// Delete Filter Options
+
+    document
+      .querySelector("#filterListContainer")
+      .addEventListener("click", (e) => {
+        if ([...e.target.classList][0] === "deleteFilterBtn") {
+          this._filtersSelected.map((element) => {
+            if (
+              element.filter === e.target.parentNode.dataset.filter &&
+              element.type === e.target.parentNode.dataset.type
+            ) {
+              this._filtersSelected.splice(
+                this._filtersSelected.indexOf(element),
+                1
+              );
+              e.target.parentNode.remove();
+              this.refresh();
+            }
+          });
+          this.refresh;
+        } else if (
+          [...e.target.parentNode.classList][0] === "deleteFilterBtn"
+        ) {
+          this._filtersSelected.map((i) => {
+            if (
+              i.filter === e.target.parentNode.parentNode.dataset.filter &&
+              i.type === e.target.parentNode.parentNode.dataset.type
+            ) {
+              this._filtersSelected.splice(this._filtersSelected.indexOf(i), 1);
+              e.target.parentNode.parentNode.remove();
+              this.refresh();
+            }
+          });
+          this.refresh;
+        }
+      });
+
+    /////////// searchbar
+
+    this._searchBar = new SearchBar(this.refresh);
+    document
+      .getElementById("searchBarContainer")
+      .appendChild(this._searchBar.createSearchBar());
+
+    /////////// test searching ///////////
+    this._searchEngine = new SearchEngine(
+      this._filtersSelected,
+      this._recipesList
+    );
+
+    this._searchEngine.searchBarFilter(this._recipesList);
   }
 }
 

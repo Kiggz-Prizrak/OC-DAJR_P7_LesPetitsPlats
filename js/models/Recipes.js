@@ -9,6 +9,7 @@ class Recipes {
     this._appliance = Recipes.appliance;
     this._ustensils = Recipes.ustensils;
   }
+
   get id() {
     return this._id;
   }

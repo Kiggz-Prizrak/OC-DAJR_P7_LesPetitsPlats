@@ -1,35 +1,32 @@
 class SearchBar {
-  constructor(filterList, cardList, searchValue) {
-    this._filterList = filterList;
-    this._cardList = cardList;
-    this._searchValue = searchValue;
+  constructor(callback) {
+    this._callback = callback;
   }
+
   createSearchBar() {
-    const element = document.createElement("label");
-    element.setAttribute("for", "search");
-    element.setAttribute("id", "searchBar");
-    const input = `
-      <input 
-        placeholder="Rechercher une recette"
-        id="searchBtn"
-        type="search">
-      <button> <i class="fa-solid fa-magnifying-glass"></i> </button>
+    this._parent = document.createElement("label");
+    this._parent.setAttribute("for", "search");
+    this._parent.setAttribute("id", "searchBar");
 
-    `;
-    element.innerHTML = input;
-    return element;
-  }
-  searchRecipes() {
-    document.getElementById("searchBar").addEventListener("input", (e) => {
-      console.log(e.target.value);
-      console.log(this._filterList);
-      console.log(this._cardList);
+    const input = document.createElement("input");
+    input.setAttribute("placeholder", "echercher une recette");
+    input.setAttribute("id", "searchBtn");
+    input.setAttribute("type", "search");
 
-      if (e.target.value && e.target.value.length >= 3) {
-        this._filterList.map((item) => {
-          console.log(item);
-        });
-      }
+    const btn = document.createElement("button");
+    btn.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i>`;
+
+    this._parent.appendChild(input);
+    this._parent.appendChild(btn);
+
+    input.addEventListener("input", (e) => {
+
+       this._callback.call(window.app)
     });
+    return this._parent;
+  }
+
+  getSearchInput() {
+    return this._parent.querySelector("input").value
   }
 }

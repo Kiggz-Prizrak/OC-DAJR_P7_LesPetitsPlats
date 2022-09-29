@@ -13,6 +13,7 @@ class FilterOptions {
     this._arraySelection = arraySelection;
     this._filterListContainer = filterListContainer;
     this._callback = callback;
+    this.container = "";
     switch (this._filterType) {
       case "Ingrédients":
         this.getIngredientList();
@@ -24,6 +25,32 @@ class FilterOptions {
         this.getUstensilsList();
         break;
     }
+  }
+  refresh(recipes) {
+    this._array = recipes
+    switch (this._filterType) {
+      case "Ingrédients":
+        this.getIngredientList();
+        break;
+      case "Appareils":
+        this.getAppliancesList();
+        break;
+      case "Ustensiles":
+        this.getUstensilsList();
+        break;
+    }
+
+    console.log(this._optionsList);
+
+    this.parent.querySelectorAll("li").forEach((li) => {
+      if (this._optionsList.includes(li.innerText)) {
+        li.style.display = "block"
+      } else {
+        li.style.display = "none"
+      }
+    });
+
+    // boucler sur chaque li, verif si le li est sensé exister, si il exite : display block, else display none
   }
 
   getIngredientList() {
@@ -54,7 +81,6 @@ class FilterOptions {
       ),
     ];
   }
-
   getUstensilsList() {
     this._optionsList = [
       ...new Set(
@@ -68,8 +94,6 @@ class FilterOptions {
       ),
     ];
   }
-
-  refreshList() {}
 
   createFilterOptions() {
     const element = document.createElement("div");
@@ -105,6 +129,7 @@ class FilterOptions {
     filterList.setAttribute("id", `${this._filterType}Container`);
     element.appendChild(filterList);
 
+    this.parent = element;
     // Add tag
     const listfiltration = (array, type, selection, listcontainer, color) => {
       filterList.innerHTML = "";
@@ -127,6 +152,7 @@ class FilterOptions {
           if (!verif) {
             selection.push(elementSelected);
 
+            // console.log(this);
 
             this._callback.call(window.app);
 
@@ -147,11 +173,13 @@ class FilterOptions {
         });
       });
     };
-    searchInput.addEventListener("click", () => {
 
+    searchInput.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
 
-      document.addEventListener("click", (e) => {
-        if (!element.contains(e.target)) {
+      document.addEventListener("click", (f) => {
+        if (!element.contains(f.target)) {
           searchInput.value = "";
           icon.style.transform = "rotate(0deg)";
           filterName.innerText = `${this._filterType}`;
@@ -169,8 +197,6 @@ class FilterOptions {
         );
       }
     });
-
-    // search filter in navbar
     searchInput.addEventListener("input", (e) => {
       e.preventDefault();
       e.stopPropagation();
@@ -209,7 +235,5 @@ class FilterOptions {
     });
 
     return element;
-
-
   }
 }
