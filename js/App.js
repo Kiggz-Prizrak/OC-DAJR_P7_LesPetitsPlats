@@ -8,18 +8,9 @@ class App {
   }
 
   refresh() {
-    // console.log(this);
-    //  console.log("refresh");
-    //  console.log(this._filtersSelected);
-    //  console.log(this._recipesList);
-
     this._recipesContainer.innerHTML = "";
 
     this._recipesList = this._recipesApi;
-
-    // this.searchEngine = new SearchEngine(
-    // this._filtersSelected, this._recipesList;
-    // );
 
     this._recipesList = this._searchEngine.searchBarFilter(
       this._searchBar.getSearchInput(),
@@ -43,7 +34,6 @@ class App {
     this._ustensilsFilter.refresh(this._recipesList);
     this._applianceFilter.refresh(this._recipesList);
 
-    console.log(this._recipesList);
     this._recipesList.forEach((recipe) => {
       const recipeInstance = new Recipes(recipe);
       this._recipesContainer.appendChild(recipeInstance.createCard());

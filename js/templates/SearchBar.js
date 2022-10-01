@@ -20,7 +20,6 @@ class SearchBar {
     this._parent.appendChild(btn);
 
     input.addEventListener("input", (e) => {
-
        this._callback.call(window.app)
     });
     return this._parent;
