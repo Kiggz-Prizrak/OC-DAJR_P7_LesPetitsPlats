@@ -27,7 +27,7 @@ class FilterOptions {
     }
   }
   refresh(recipes) {
-    this._array = recipes
+    this._array = recipes;
     switch (this._filterType) {
       case "Ingrédients":
         this.getIngredientList();
@@ -44,13 +44,11 @@ class FilterOptions {
 
     this.parent.querySelectorAll("li").forEach((li) => {
       if (this._optionsList.includes(li.innerText)) {
-        li.style.display = "block"
+        li.style.display = "block";
       } else {
-        li.style.display = "none"
+        li.style.display = "none";
       }
     });
-
-    // boucler sur chaque li, verif si le li est sensé exister, si il exite : display block, else display none
   }
 
   getIngredientList() {
@@ -67,7 +65,6 @@ class FilterOptions {
       ),
     ];
   }
-
   getAppliancesList() {
     this._optionsList = [
       ...new Set(
@@ -125,13 +122,17 @@ class FilterOptions {
     searchBar.appendChild(icon);
 
     const filterList = document.createElement("ul");
+    filterList.style.backgroundColor = this._color;
     filterList.className = "filterList";
     filterList.setAttribute("id", `${this._filterType}Container`);
     element.appendChild(filterList);
 
     this.parent = element;
+
     // Add tag
     const listfiltration = (array, type, selection, listcontainer, color) => {
+      element.style.left = "-3px";
+      element.style.top = "-3px";
       filterList.innerHTML = "";
       array.map((element) => {
         const filter = document.createElement("li");
@@ -151,8 +152,6 @@ class FilterOptions {
           });
           if (!verif) {
             selection.push(elementSelected);
-
-            // console.log(this);
 
             this._callback.call(window.app);
 
@@ -174,16 +173,22 @@ class FilterOptions {
       });
     };
 
+    const closeListFiltration = () => {
+      element.style.left = "0px";
+      element.style.top = "0px";
+      searchInput.value = "";
+      icon.style.transform = "rotate(0deg)";
+      filterName.innerText = `${this._filterType}`;
+      filterList.innerHTML = "";
+    };
+
     searchInput.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
 
       document.addEventListener("click", (f) => {
         if (!element.contains(f.target)) {
-          searchInput.value = "";
-          icon.style.transform = "rotate(0deg)";
-          filterName.innerText = `${this._filterType}`;
-          filterList.innerHTML = "";
+          closeListFiltration()
         }
       });
       if (!filterList.innerHTML) {
@@ -226,12 +231,7 @@ class FilterOptions {
       }
     });
     icon.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      searchInput.value = "";
-      icon.style.transform = "rotate(0deg)";
-      filterName.innerText = `${this._filterType}`;
-      filterList.innerHTML = "";
+      closeListFiltration()
     });
 
     return element;

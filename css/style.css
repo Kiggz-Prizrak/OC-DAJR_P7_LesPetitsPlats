@@ -41,6 +41,12 @@ body {
   background: #e7e7e7;
   border-radius: 5px;
   border: none;
+  padding-left: 22px;
+  font-family: "Lato";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
 }
 
 .searchBarContainer input::placeholder {
@@ -49,7 +55,6 @@ body {
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
-  padding-left: 22px;
 }
 
 .searchBarContainer button {
@@ -117,11 +122,12 @@ body {
 
 .filterCategoryContainer {
   display: flex;
+  height: 69px
 }
 
 .filterCategoryBlock {
   min-width: 170px;
-  /* max-height: 397px; */
+  position: relative;
   margin-right: 20px;
   display: flex;
   flex-direction: column;
@@ -176,10 +182,13 @@ body {
   z-index: 3;
 }
 .filterList {
+  position: relative;
+  top: -5px;
   margin: 0;
   display: flex;
   flex-wrap: wrap;
-  padding: 0px;
+  padding: 10px 0px;
+  border-radius: 0px 0px 5px 5px;
 }
 .filterList li {
   list-style: none;

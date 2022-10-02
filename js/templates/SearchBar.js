@@ -9,7 +9,7 @@ class SearchBar {
     this._parent.setAttribute("id", "searchBar");
 
     const input = document.createElement("input");
-    input.setAttribute("placeholder", "echercher une recette");
+    input.setAttribute("placeholder", "Rechercher une recette");
     input.setAttribute("id", "searchBtn");
     input.setAttribute("type", "search");
 
