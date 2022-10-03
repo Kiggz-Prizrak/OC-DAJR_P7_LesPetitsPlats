@@ -10,17 +10,57 @@ class SearchEngine {
     this._filterList = filters;
     this._defaultRecipesList = recipes;
     console.log(this._filterList);
+
+    const filtersIngredientsList = [];
+    for (let i = 0; i < this._filterList.length; i++) {
+      console.log(this._filterList[i]);
+      if (this._filterList[i].type === "Ingrédients") {
+        filtersIngredientsList.push(this._filterList[i]);
+      }
+    }
     // const filtersIngredientsList = this._filterList.filter(
     //   (element) => element.type === "Ingrédients"
     // );
-    // filtersIngredientsList.map((ingredient) => {
-    //   this._defaultRecipesList = this._defaultRecipesList.filter((recipe) => {
-    //     const ingredientsList = recipe.ingredients.map((i) => {
-    //       return i.ingredient;
-    //     });
-    //     return ingredientsList.includes(ingredient.filter);
-    //   });
-    // });
+
+
+
+    for (let i = 0; i < filtersIngredientsList.length; i++) {
+
+      const ingredient = filtersIngredientsList[i];
+
+      const array = []
+
+      const ingredientList = [];
+
+      for (let i = 0; i < this._defaultRecipesList.length; i++) {
+
+        const recipe = this._defaultRecipesList[i];
+
+        
+        for (let i = 0; i < recipe.ingredients.length; i++) {
+          ingredientList.push(recipe.ingredients[i].ingredient);
+        }
+
+        array.push(ingredientsList.includes(ingredient.filter));
+      }
+      this._defaultRecipesList = array;
+
+
+    }
+
+
+
+      // filtersIngredientsList.map((ingredient) => {
+
+      //   this._defaultRecipesList = this._defaultRecipesList.filter((recipe) => {
+      //     const ingredientsList = recipe.ingredients.map((i) => {
+      //       return i.ingredient;
+      //     });
+      //     return ingredientsList.includes(ingredient.filter);
+      //   });
+      // });
+
+      console.log(this._defaultRecipesList);
     return this._defaultRecipesList;
   }
 
@@ -59,6 +99,7 @@ class SearchEngine {
   searchBarFilter(searchValue, recipes) {
     if (searchValue.length < 3) return recipes;
 
+    const recipesMatch = [];
     // const recipesMatch = recipes.filter((recipe) =>
     //   recipe.name.toLowerCase().includes(searchValue.toLowerCase())
     // );
