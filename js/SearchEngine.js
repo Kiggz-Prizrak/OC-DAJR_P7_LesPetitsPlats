@@ -11,6 +11,8 @@ class SearchEngine {
     this._defaultRecipesList = recipes;
     console.log(this._filterList);
 
+    //////////////////////////////////////
+
     const filtersIngredientsList = [];
     for (let i = 0; i < this._filterList.length; i++) {
       console.log(this._filterList[i]);
@@ -22,28 +24,26 @@ class SearchEngine {
     //   (element) => element.type === "Ingrédients"
     // );
 
-
-
     //////////////////////////////////////
 
     for (let i = 0; i < filtersIngredientsList.length; i++) {
       const ingredient = filtersIngredientsList[i];
 
-      const array = []
+      const array = [];
       for (let j = 0; j < this._defaultRecipesList.length; j++) {
         const recipe = this._defaultRecipesList[j];
 
-        const ingredientsList = [] 
+        const ingredientsList = [];
         for (let k = 0; k < recipe.ingredients.length; k++) {
-          ingredientsList.push(recipe.ingredients[k].ingredient); 
+          ingredientsList.push(recipe.ingredients[k].ingredient);
         }
 
-        if(ingredientsList.includes(ingredient.filter)) {
-          array.push(recipe)
+        if (ingredientsList.includes(ingredient.filter)) {
+          array.push(recipe);
         }
       }
 
-      this._defaultRecipesList = array
+      this._defaultRecipesList = array;
     }
 
     //////////////////////////////////////
@@ -64,9 +64,49 @@ class SearchEngine {
   ustensilsFilter(filters, recipes) {
     this._filterList = filters;
     this._defaultRecipesList = recipes;
+
+    //////////////////////////////////////
+
+    console.log(this._filterList);
+
+    const filtersUstensilsList = [];
+    for (let i = 0; i < this._filterList.length; i++) {
+      console.log(this._filterList[i]);
+      if (this._filterList[i].type === "Ustensiles") {
+        filtersUstensilsList.push(this._filterList[i]);
+      }
+    }
+
     // const filterUstensilsList = this._filterList.filter(
     //   (element) => element.type === "Ustensiles"
     // );
+
+    //////////////////////////////////////
+
+    console.log(filtersUstensilsList);
+
+    for (let i = 0; i < filtersUstensilsList.length; i++) {
+      const ustensil = filtersUstensilsList[i];
+
+      const array = [];
+      for (let j = 0; j < this._defaultRecipesList.length; j++) {
+        const recipe = this._defaultRecipesList[j];
+
+        const ustensilsList = [];
+        for (let k = 0; k < recipe.ustensils.length; k++) {
+          ustensilsList.push(
+            recipe.ustensils[k][0].toUpperCase() + recipe.ustensils[k].slice(1)
+          );
+        }
+        console.log(ustensilsList);
+
+        if (ustensilsList.includes(ustensil.filter)) {
+          array.push(recipe);
+        }
+      }
+
+      this._defaultRecipesList = array;
+    }
     // filterUstensilsList.map((ustensil) => {
     //   this._defaultRecipesList = this._defaultRecipesList.filter((recipe) => {
     //     const ustensilsList = recipe.ustensils.map((i) => {
@@ -76,15 +116,30 @@ class SearchEngine {
     //     return ustensilsList.includes(ustensil.filter);
     //   });
     // });
+
     return this._defaultRecipesList;
   }
 
   applianceFilter(filters, recipes) {
     this._filterList = filters;
     this._defaultRecipesList = recipes;
+
+    //////////////////////////////////////
+
     // const filterAppliancesList = this._filterList.filter(
     //   (element) => element.type === "Appareils"
     // );
+
+    const filtersAppliancesList = [];
+    for (let i = 0; i < this._filterList.length; i++) {
+      console.log(this._filterList[i]);
+      if (this._filterList[i].type === "Appareils") {
+        filtersAppliancesList.push(this._filterList[i]);
+      }
+    }
+
+    //////////////////////////////////////
+
     // filterAppliancesList.map((appliance) => {
     //   this._defaultRecipesList = this._defaultRecipesList.filter(
     //     (recipe) => recipe.appliance === appliance.filter
