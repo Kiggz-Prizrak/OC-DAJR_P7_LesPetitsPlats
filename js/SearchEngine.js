@@ -24,43 +24,40 @@ class SearchEngine {
 
 
 
-    for (let i = 0; i < filtersIngredientsList.length; i++) {
+    //////////////////////////////////////
 
+    for (let i = 0; i < filtersIngredientsList.length; i++) {
       const ingredient = filtersIngredientsList[i];
 
       const array = []
+      for (let j = 0; j < this._defaultRecipesList.length; j++) {
+        const recipe = this._defaultRecipesList[j];
 
-      const ingredientList = [];
-
-      for (let i = 0; i < this._defaultRecipesList.length; i++) {
-
-        const recipe = this._defaultRecipesList[i];
-
-        
-        for (let i = 0; i < recipe.ingredients.length; i++) {
-          ingredientList.push(recipe.ingredients[i].ingredient);
+        const ingredientsList = [] 
+        for (let k = 0; k < recipe.ingredients.length; k++) {
+          ingredientsList.push(recipe.ingredients[k].ingredient); 
         }
 
-        array.push(ingredientsList.includes(ingredient.filter));
+        if(ingredientsList.includes(ingredient.filter)) {
+          array.push(recipe)
+        }
       }
-      this._defaultRecipesList = array;
 
-
+      this._defaultRecipesList = array
     }
 
+    //////////////////////////////////////
 
+    // filtersIngredientsList.map((ingredient) => {
+    //   this._defaultRecipesList = this._defaultRecipesList.filter((recipe) => {
+    //     const ingredientsList = recipe.ingredients.map((i) => {
+    //       return i.ingredient;
+    //     });
+    //     return ingredientsList.includes(ingredient.filter);
+    //   });
+    // });
 
-      // filtersIngredientsList.map((ingredient) => {
-
-      //   this._defaultRecipesList = this._defaultRecipesList.filter((recipe) => {
-      //     const ingredientsList = recipe.ingredients.map((i) => {
-      //       return i.ingredient;
-      //     });
-      //     return ingredientsList.includes(ingredient.filter);
-      //   });
-      // });
-
-      console.log(this._defaultRecipesList);
+    console.log(this._defaultRecipesList);
     return this._defaultRecipesList;
   }
 
