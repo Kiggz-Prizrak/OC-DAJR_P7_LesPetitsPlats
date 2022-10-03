@@ -55,7 +55,7 @@ class SearchEngine {
     });
     return this._defaultRecipesList;
   }
-
+  // SearchBar
   searchBarFilter(searchValue, recipes) {
     if (searchValue.length < 3) return recipes;
 
