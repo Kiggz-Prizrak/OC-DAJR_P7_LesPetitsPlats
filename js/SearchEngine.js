@@ -9,9 +9,6 @@ class SearchEngine {
   ingredientsFilter(filters, recipes) {
     this._filterList = filters;
     this._defaultRecipesList = recipes;
-    console.log(this._filterList);
-
-    //////////////////////////////////////
 
     const filtersIngredientsList = [];
     for (let i = 0; i < this._filterList.length; i++) {
@@ -20,11 +17,6 @@ class SearchEngine {
         filtersIngredientsList.push(this._filterList[i]);
       }
     }
-    // const filtersIngredientsList = this._filterList.filter(
-    //   (element) => element.type === "Ingrédients"
-    // );
-
-    //////////////////////////////////////
 
     for (let i = 0; i < filtersIngredientsList.length; i++) {
       const ingredient = filtersIngredientsList[i];
@@ -46,28 +38,12 @@ class SearchEngine {
       this._defaultRecipesList = array;
     }
 
-    //////////////////////////////////////
-
-    // filtersIngredientsList.map((ingredient) => {
-    //   this._defaultRecipesList = this._defaultRecipesList.filter((recipe) => {
-    //     const ingredientsList = recipe.ingredients.map((i) => {
-    //       return i.ingredient;
-    //     });
-    //     return ingredientsList.includes(ingredient.filter);
-    //   });
-    // });
-
-    console.log(this._defaultRecipesList);
     return this._defaultRecipesList;
   }
 
   ustensilsFilter(filters, recipes) {
     this._filterList = filters;
     this._defaultRecipesList = recipes;
-
-    //////////////////////////////////////
-
-    console.log(this._filterList);
 
     const filtersUstensilsList = [];
     for (let i = 0; i < this._filterList.length; i++) {
@@ -77,45 +53,24 @@ class SearchEngine {
       }
     }
 
-    // const filterUstensilsList = this._filterList.filter(
-    //   (element) => element.type === "Ustensiles"
-    // );
-
-    //////////////////////////////////////
-
-    console.log(filtersUstensilsList);
-
     for (let i = 0; i < filtersUstensilsList.length; i++) {
       const ustensil = filtersUstensilsList[i];
 
       const array = [];
       for (let j = 0; j < this._defaultRecipesList.length; j++) {
         const recipe = this._defaultRecipesList[j];
-
         const ustensilsList = [];
         for (let k = 0; k < recipe.ustensils.length; k++) {
           ustensilsList.push(
             recipe.ustensils[k][0].toUpperCase() + recipe.ustensils[k].slice(1)
           );
         }
-        console.log(ustensilsList);
-
         if (ustensilsList.includes(ustensil.filter)) {
           array.push(recipe);
         }
       }
-
       this._defaultRecipesList = array;
     }
-    // filterUstensilsList.map((ustensil) => {
-    //   this._defaultRecipesList = this._defaultRecipesList.filter((recipe) => {
-    //     const ustensilsList = recipe.ustensils.map((i) => {
-    //       i = i[0].toUpperCase() + i.slice(1);
-    //       return i;
-    //     });
-    //     return ustensilsList.includes(ustensil.filter);
-    //   });
-    // });
 
     return this._defaultRecipesList;
   }
@@ -123,12 +78,6 @@ class SearchEngine {
   applianceFilter(filters, recipes) {
     this._filterList = filters;
     this._defaultRecipesList = recipes;
-
-    //////////////////////////////////////
-
-    // const filterAppliancesList = this._filterList.filter(
-    //   (element) => element.type === "Appareils"
-    // );
 
     const filtersAppliancesList = [];
     for (let i = 0; i < this._filterList.length; i++) {
@@ -138,30 +87,21 @@ class SearchEngine {
       }
     }
 
-    //////////////////////////////////////
 
     for (let i = 0; i < filtersAppliancesList.length; i++) {
       const appliance = filtersAppliancesList[i];
-      const array = []
+      const array = [];
 
       for (let j = 0; j < this._defaultRecipesList.length; j++) {
         const recipe = this._defaultRecipesList[j];
-        
+
         if (recipe.appliance === appliance.filter) {
-          
-          array.push(recipe)
+          array.push(recipe);
         }
       }
-
-      console.log(array);
       this._defaultRecipesList = array;
     }
 
-    // filterAppliancesList.map((appliance) => {
-    //   this._defaultRecipesList = this._defaultRecipesList.filter(
-    //     (recipe) => recipe.appliance === appliance.filter
-    //   );
-    // });
     return this._defaultRecipesList;
   }
 
@@ -169,9 +109,13 @@ class SearchEngine {
     if (searchValue.length < 3) return recipes;
 
     const recipesMatch = [];
-    // const recipesMatch = recipes.filter((recipe) =>
-    //   recipe.name.toLowerCase().includes(searchValue.toLowerCase())
-    // );
+
+    for (let i = 0; i < recipes.length; i++) {
+      const recipe = recipes[i];
+      if (recipe.name.toLowerCase().includes(searchValue.toLowerCase())) {
+        recipesMatch.push(recipe);
+      }
+    }
     return recipesMatch;
   }
 }
