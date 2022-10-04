@@ -140,6 +140,23 @@ class SearchEngine {
 
     //////////////////////////////////////
 
+    for (let i = 0; i < filtersAppliancesList.length; i++) {
+      const appliance = filtersAppliancesList[i];
+      const array = []
+
+      for (let j = 0; j < this._defaultRecipesList.length; j++) {
+        const recipe = this._defaultRecipesList[j];
+        
+        if (recipe.appliance === appliance.filter) {
+          
+          array.push(recipe)
+        }
+      }
+
+      console.log(array);
+      this._defaultRecipesList = array;
+    }
+
     // filterAppliancesList.map((appliance) => {
     //   this._defaultRecipesList = this._defaultRecipesList.filter(
     //     (recipe) => recipe.appliance === appliance.filter
