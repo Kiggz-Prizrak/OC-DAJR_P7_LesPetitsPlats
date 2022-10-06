@@ -138,7 +138,7 @@ class App {
       this._recipesList
     );
 
-    this._searchEngine.searchBarFilter(this._recipesList);
+    this._searchEngine.searchBarFilter('', this._recipesList);
   }
 }
 
