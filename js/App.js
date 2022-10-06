@@ -1,5 +1,6 @@
 class App {
   constructor() {
+    
     this._recipesApi = recipes;
     this._recipesContainer = document.getElementById("recipesCardsContainer");
     this._filtersSelected = [];
@@ -11,6 +12,7 @@ class App {
     this._recipesContainer.innerHTML = "";
 
     this._recipesList = this._recipesApi;
+    console.log('recipes');
 
     this._recipesList = this._searchEngine.searchBarFilter(
       this._searchBar.getSearchInput(),
@@ -133,12 +135,13 @@ class App {
       .appendChild(this._searchBar.createSearchBar());
 
     /////////// test searching ///////////
+    console.log(this._recipesList);
     this._searchEngine = new SearchEngine(
       this._filtersSelected,
       this._recipesList
     );
 
-    this._searchEngine.searchBarFilter(this._recipesList);
+    this._searchEngine.searchBarFilter('', this._recipesList);
   }
 }
 
